@@ -19,12 +19,13 @@ bool safetyAlgorithm(int resourcesAvailable[NUM_OF_RESOURCES], int resourceNeede
                 for(int resourceType = 0; resourceType < NUM_OF_RESOURCES; ++resourceType){
                     if(resourceNeeded[processNumber][resourceType] > work[resourceType]){
                         allResourcesAvailable = false; 
-                        std::cout << "Unsafe sequence found for process: " << processNumber << std::endl;  
+                        std::cout << "Unsafe sequence found for process: " << processNumber << ". Not enough of resource: " << resourceType << std::endl;  
                         break; 
                     }
+                    allResourcesAvailable = true; 
+                    std::cout << "Enough of resource type: " << resourceType <<  " has been found for process: " << processNumber << std::endl;
                 }
-                allResourcesAvailable = true; 
-                std::cout << "A safe process has been found for process: " << processNumber << std::endl;
+
             }
             ++processesFinished; //temp 
         }
