@@ -8,6 +8,6 @@ int main(){
     calculateNeededResources(neededResources, maxResources, allocatedResources);
     printNeededResources(neededResources); 
 
-    
+    safetyAlgorithm(resourcesAvailable, neededResources); 
 
 }
