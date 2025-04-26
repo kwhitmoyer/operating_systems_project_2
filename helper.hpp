@@ -10,26 +10,42 @@ bool safetyAlgorithm(int resourcesAvailable[NUM_OF_RESOURCES], int resourceNeede
     bool finish[NUM_OF_PROCESSES] = {false, false, false, false, false}; 
 
     int processesFinished = 0;
-
+    std::string safeProcessSequence = "";
+    
     while(processesFinished < NUM_OF_PROCESSES){
         bool foundProcess = false; 
         for(int processNumber = 0; processNumber < NUM_OF_PROCESSES; ++processNumber){
             if (!finish[processNumber]){
-                bool allResourcesAvailable = false; 
+                bool allResourcesAvailable = true; 
                 for(int resourceType = 0; resourceType < NUM_OF_RESOURCES; ++resourceType){
                     if(resourceNeeded[processNumber][resourceType] > work[resourceType]){
                         allResourcesAvailable = false; 
                         std::cout << "Unsafe sequence found for process: " << processNumber << ". Not enough of resource: " << resourceType << std::endl;  
                         break; 
-                    }
-                    allResourcesAvailable = true; 
-                    std::cout << "Enough of resource type: " << resourceType <<  " has been found for process: " << processNumber << std::endl;
+                    } else {
+                        std::cout << "Enough of resource type: " << resourceType <<  " has been found for process: " << processNumber << std::endl;
+                    } 
                 }
+                if(allResourcesAvailable) {
+                    std::cout << "There were enough resources to run process: " << processNumber << std::endl; 
+                    for(int resourceType = 0; resourceType < NUM_OF_RESOURCES; ++resourceType){
+                        work[resourceType] += allocatedResources[processNumber][resourceType];
+                    }
 
+                    finish[processNumber] = true; 
+                    foundProcess = true; 
+                    processesFinished++; 
+                    safeProcessSequence += "P" + std::to_string(processNumber) + "->"; 
+                }
             }
-            ++processesFinished; //temp 
+        }
+        if(!foundProcess){ //if no process can run that would keep the system in a safe state. 
+            std::cout << "The system is not in a safe state." << std::endl; 
+            return false; 
         }
     }
+    std::cout << "System is in a safe state." << std::endl;
+    std::cout << "The safe process sequence is " << safeProcessSequence << std::endl;
     return true; 
 }
 
