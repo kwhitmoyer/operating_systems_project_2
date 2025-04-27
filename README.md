@@ -28,4 +28,4 @@ A system can also be in an unsafe safe when the number of available resources is
 
 For this assignment, a concrete system state was given, represented in this image below:
 
-![Concrete System State]()
+![Concrete System State](.images/initialsystemstate.png)
