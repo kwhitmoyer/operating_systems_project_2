@@ -6,6 +6,7 @@ bool safetyAlgorithm(int resourcesAvailable[NUM_OF_RESOURCES], int resourceNeede
     for(int resourceNumber = 0; resourceNumber < NUM_OF_RESOURCES; ++resourceNumber){
         work[resourceNumber] = resourcesAvailable[resourceNumber];
     }
+    std::cout << "Beginning search for safe sequence." << std::endl; 
 
     bool finish[NUM_OF_PROCESSES] = {false, false, false, false, false}; 
 
@@ -20,14 +21,14 @@ bool safetyAlgorithm(int resourcesAvailable[NUM_OF_RESOURCES], int resourceNeede
                 for(int resourceType = 0; resourceType < NUM_OF_RESOURCES; ++resourceType){
                     if(resourceNeeded[processNumber][resourceType] > work[resourceType]){
                         allResourcesAvailable = false; 
-                        std::cout << "Unsafe sequence found for process: " << processNumber << ". Not enough of resource: " << resourceType << std::endl;  
+                        std::cout << "P" << processNumber << " is unable to be run safely at this time." << std::endl << std::endl;  
                         break; 
                     } else {
-                        std::cout << "Enough of resource type: " << resourceType <<  " has been found for process: " << processNumber << std::endl;
+                        std::cout << "Enough of resource type: " << resourceType <<  " has been found for P" << processNumber << " to run safely." << std::endl;
                     } 
                 }
                 if(allResourcesAvailable) {
-                    std::cout << "There were enough resources to run process: " << processNumber << std::endl; 
+                    std::cout << std::endl << "There were enough A, B, and C resources to run process: " << processNumber << std::endl << std::endl; 
                     for(int resourceType = 0; resourceType < NUM_OF_RESOURCES; ++resourceType){
                         work[resourceType] += allocatedResources[processNumber][resourceType];
                     }
@@ -44,8 +45,9 @@ bool safetyAlgorithm(int resourcesAvailable[NUM_OF_RESOURCES], int resourceNeede
             return false; 
         }
     }
-    std::cout << "System is in a safe state." << std::endl;
-    std::cout << "The safe process sequence is " << safeProcessSequence << std::endl;
+    std::cout << "All processes successfully run." << std::endl;
+    std::cout << "System is in a safe state." << std::endl << std::endl; 
+    std::cout << "The safe process sequence is: " << safeProcessSequence << std::endl;
     return true; 
 }
 
@@ -80,4 +82,5 @@ void printNeededResources(int neededResources[NUM_OF_PROCESSES][NUM_OF_RESOURCES
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
