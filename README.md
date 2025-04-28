@@ -29,3 +29,11 @@ A system can also be in an unsafe safe when the number of available resources is
 For this assignment, a concrete system state was given, represented in this image below:
 
 ![Concrete System State](./images/initialsystemstate.png)
+
+This was represented as one array and three matrices. A model of the data structure can be found in the header.hpp file. 
+
+![Data Structure](./images/matrix.png)
+
+The actual data itself was read in from inputdata.txt.
+
+![Input Text File](./images/inputfile.png)
